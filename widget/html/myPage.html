@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/myPage.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<!-- <script type="text/javascript" src="../script/lib/flexible.js"></script> -->
+</head>
+<body style="background-color:#2E3466;height:100%;">
+	<div id="wrap" class="columnDisBox">
+		<header id="header" style="background-color:#373A71;"></header>
+		<div id="main" class="main columnBoxFlex" style="overflow:hidden;position:relative;">
+			<div class="wrapperScroll wrapperNoRefrensh" id="wrapperScroll" style="height:100%;position:absolute;width:100%;">
+				<div class="scrollSlide">
+					
+					<div class="myPage_tit disBox">
+						<img src="../image/portrait.gif" class="portrait" alt=""/>
+						<div class="boxFlex">
+							<p>156****0200</p>
+							<a href="javascript:void(0);">申请代理</a>
+						</div>
+					</div>
+					<div class="myPage_Main">
+						<ul>
+							<li onclick="goCertificationPage()" tapmode >
+								<div class="disBox">
+									<i class="iconfont icon-shimingrenzheng iconImg"></i>
+									<p class="boxFlex">实名认证</p>
+									<span>未认证</span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="goCreditCardPage()" tapmode >
+								<div class="disBox">
+									<i class="iconfont icon-xinyongqia3 iconImg"></i>
+									<p class="boxFlex">我的信用卡</p>
+									<span></span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="goDebitCardPage()" tapmode >
+								<div class="disBox">
+									<i class="iconfont icon-xinyongqia iconImg"></i>
+									<p class="boxFlex">我的储蓄卡</p>
+									<span></span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="goCollectMoneyPage()" tapmode>
+								<div class="disBox">
+									<i class="iconfont icon-list_yingshoukuan iconImg"></i>
+									<p class="boxFlex">收款方式</p>
+									<span>未设置</span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="goMyFriendPage()" tapmode>
+								<div class="disBox">
+									<i class="iconfont icon-jiahaoyou- iconImg"></i>
+									<p class="boxFlex">我的好友</p>
+									<span></span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="clearFun()" tapmode >
+								<div class="disBox">
+									<i class="iconfont icon-qingchu1 iconImg"></i>
+									<p class="boxFlex">清除缓存</p>
+									<span id="CacheSize">0M</span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+							<li onclick="goArticleView()" tapmode >
+								<div class="disBox">
+									<i class="iconfont icon-xiaoxi2 iconImg"></i>
+									<p class="boxFlex">联系我们</p>
+									<span></span>
+									<i class="iconfont icon-you iconArrow"></i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="exitBtn">
+						<a href="javascript:void(0);" onclick="exit()" tapmode >退出登录</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer">
+			<ul>
+				<li onclick="switchTab0()" tapmode >
+					<i class="iconfont icon-1"></i>
+					<p>首页</p>
+				</li>
+				<li onclick="switchTab1()" tapmode >
+					<i class="iconfont icon-wodejihua"></i>
+					<p>计划</p>
+				</li>
+				<li  onclick="switchTab2()" tapmode >
+					<i class="iconfont icon-tianchongxing-"></i>
+					<p>钱包</p>
+				</li>
+				<li class="active">
+					<i class="iconfont icon-wode"></i>
+					<p>我的</p>
+				</li>
+			</ul>
+		</footer>
+	</div>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/swiper.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+	        exit_app();  //双击退出APP
+			URL=$api.URL();
+
+			//获取缓存大小
+		   	api.getCacheSize(function(ret) {
+			   	var size = ret.size;
+			  	document.getElementById("CacheSize").innerHTML=(size/1048576).toFixed(2)+"M";
+			});
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+	    //双击退出APP
+        function exit_app() {
+            api.addEventListener({
+                name : 'keyback'
+            }, function(ret, err) {
+                api.toast({
+                   msg: '再按一次返回键退出'+api.appName,
+                   duration: 2000,
+                   location: 'bottom'
+                });
+                api.addEventListener({
+                    name : 'keyback'
+                }, function(ret, err) {
+                    api.closeWidget({
+                        animation : {
+                            type : 'flip',
+                            subType : 'from_bottom',
+                            duration : 500
+                        },
+                        silent : true
+                    });
+                });
+              setTimeout(function() {
+                 exit_app();
+              }, 3000);
+            });
+        }
+		
+		
+		var wrapper = document.getElementById("wrapperScroll");
+		var meunScroll = new BScroll(wrapper, {
+			click: true,
+			scrollX: false,
+			scrollY: true,   
+			pullUpLoad:false,
+			pullDownRefresh:false
+		});
+		
+		/*meunScroll.on("pullingDown",function(){     //下拉刷新
+			$("#wrapperScroll0 .refrenshLoad p").hide();
+			$("#wrapperScroll0 .refrenshLoad img").show();  
+		}); */
+
+		//首页
+		var switchTab0=function(){
+			api.openWin({
+				name: 'firstPage',
+				url: './firstPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+		//计划
+		var switchTab1=function(){
+			api.openWin({
+				name: 'planPage',
+				url: './planPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+		//钱包
+		var switchTab2=function(){
+			api.openWin({
+				name: 'myWalletPage',
+				url: './myWalletPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//实名认证
+		var goCertificationPage =function(){
+			api.openWin({
+				name: 'certificationPage',
+				url: './certificationPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//我的信用卡
+		var goCreditCardPage=function(){
+			MyToast("正在努力开发中。。。");
+		}
+
+		//我的储蓄卡
+		var goDebitCardPage=function(){
+			MyToast("正在努力开发中。。。");
+		}
+
+		//收款方式
+		var goCollectMoneyPage=function(){
+			api.openWin({
+				name: 'collectMoneyPage',
+				url: './collectMoneyPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//我的好友
+		var goMyFriendPage=function(){
+			api.openWin({
+				name: 'myFriendPage',
+				url: './myFriendPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//清除缓存
+		var clearFun=function(){
+			api.clearCache(function(){
+	   			MyToast("清除成功");
+	   			$("#CacheSize").html("0M");
+	   		})
+		}
+
+		//客服
+		var goArticleView=function(){
+			api.openWin({
+				name: 'articleViewPage',
+				url: './articleViewPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		var exit=function(){
+			MyConfirm("您确定要退出登录此账号吗？",function(){
+				api.closeToWin({
+				    name: 'root'
+				});
+			})
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的消息</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/myMessagePage.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<script type="text/javascript" src="../script/lib/flexible.js"></script>
+</head>
+<body style="height:100%;">
+	<div id="wrap" class="columnDisBox">
+		<header class="header" id="header">
+			<a href="javascript:void(0);" class="btn_lf btn_back" onclick="goBack()" tapmode >
+				<i class="iconfont icon-fanhui"></i>
+			</a>
+			<h3>我的消息</h3>
+		</header>
+		
+		<div id="main" class="main columnBoxFlex" style="overflow:hidden;position:relative;">
+			<div class="wrapperScroll wrapperNoRefrensh" id="wrapperScroll" style="height:100%;position:absolute;width:100%;">
+				<div class="scrollSlide">
+					
+					<div class="systemMessage">
+						<ul id="list">
+							<li>
+								<p class="systemMsgTime">2019/07/18 16:09:25</p>
+								<div class="systemMsgMain" onclick="goMessageDetailPage()" tapmode >
+									<div class="systemMsg_tit">
+										<h3>有钱还新版上线</h3>
+										<p>v2.0版本全新上线，更多优惠等你来领！</p>
+									</div>
+									<div class="systemMsg_con disBox">
+										<p class="boxFlex noRead">查看详情</p>
+										<i class="iconfont icon-you"></i>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+			URL=$api.URL();
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+		var wrapper = document.getElementById("wrapperScroll");
+		var meunScroll = new BScroll(wrapper, {
+			click: true,
+			scrollX: false,
+			scrollY: true,   
+			pullUpLoad:false,
+			pullDownRefresh:false
+		});
+		
+		/*meunScroll.on("pullingDown",function(){     //下拉刷新
+			$("#wrapperScroll0 .refrenshLoad p").hide();
+			$("#wrapperScroll0 .refrenshLoad img").show();  
+		}); */
+
+		//消息详情
+		var goMessageDetailPage=function(){
+			api.openWin({
+				name: 'messageDetailPage',
+				url: './messageDetailPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+	</script>
+</body>
+</html>

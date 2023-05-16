@@ -1,0 +1,68 @@
+.myPage_tit{
+	padding:30px 16px 20px;
+	background-color:#373A71;
+	margin-bottom:10px;
+}
+.myPage_tit .portrait{
+	width:70px;
+	height:70px;
+	margin-right:12px;
+}
+.myPage_tit .boxFlex p{
+	color:#7683B0;
+	font-size:14px;
+	padding-bottom:10px;
+}
+.myPage_tit .boxFlex a{
+	color:#40ADE2;
+	font-size:14px;
+}
+.myPage_Main{
+	/* background-color:#373A71; */
+}
+.myPage_Main ul li{
+	height:60px;
+	background-color:#373A71;
+	padding:0 16px 0 18px;
+	margin-bottom:2px;
+}
+.myPage_Main ul li p{
+	color:#ADB5E5;
+	font-size:15px;
+	height:60px;
+	line-height:60px;
+}
+.myPage_Main ul li .iconImg{
+	color:#6A719F;
+	font-size:22px;
+	margin-right:15px;
+	display:inline-block;
+	width:22px;
+}
+.myPage_Main ul li span{
+	color:#757CAB;
+	font-size:14px;
+}
+.myPage_Main ul li .iconArrow{
+	color:#7D84B0;
+	font-size:18px;
+	margin-left:6px;
+}
+.exitBtn{
+	padding:25px 26px;
+}
+.exitBtn a{
+	display:block;
+	width:100%;
+	height:52px;
+	line-height:52px;
+	text-align:center;
+	color:#fff;
+	font-size:15px;
+	border-radius:4px;
+	background:linear-gradient(to bottom,#52DDFB,#39BFFC);
+	background:-moz-linear-gradient( top,#52DDFB,#39BFFC);
+	background:-webkit-linear-gradient( top,#52DDFB,#39BFFC);
+	background:-webkit-gradient(linear,center top,center bottom,from(#52DDFB),to(#39BFFC));
+	background:-o-linear-gradient( top,#52DDFB,#39BFFC);
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>实名认证</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/debtNotePage.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<!-- <script type="text/javascript" src="../script/lib/flexible.js"></script> -->
+</head>
+<body style="background-color:#2E3466;height:100%;">
+	<div id="wrap" class="columnDisBox">
+		<header class="header" id="header">
+			<a href="javascript:void(0);" class="btn_lf btn_back" onclick="goBack()" tapmode >
+				<i class="iconfont icon-fanhui"></i>
+			</a>
+			<h3>实名认证</h3>
+		</header>
+		
+		<div id="main" class="main columnBoxFlex" style="overflow:hidden;position:relative;">
+			<div class="wrapperScroll wrapperNoRefrensh" id="wrapperScroll" style="height:100%;position:absolute;width:100%;">
+				<div class="scrollSlide">
+					
+					<div class="debtMain">
+						<form method="post" action="">
+							<ul class="debtList">
+								<li>
+									<div class="disBox">
+										<span class="listName">姓名</span>
+										<input type="text" class="boxFlex" name="real_name" value="" placeholder="请填写姓名"/>
+									</div>
+								</li>
+								<li>
+									<div class="disBox">
+										<span class="listName">身份证</span>
+										<input type="number" class="boxFlex" name="id_card" value="" placeholder="请输入身份证"/>
+									</div>
+								</li>
+							</ul>
+							<div class="certificateMain">
+								<p>拍摄并上传您的证件照片</p>
+								<ul class="upLoadIdCard clearfix">
+									<li>
+										<div class="" onclick="upLoadIdCard(0)" tapmode >
+											<img src="../image/idcard0.png" alt=""/>
+										</div>
+									</li>
+									<li>
+										<div class="" onclick="upLoadIdCard(1)" tapmode >
+											<img src="../image/idcard1.png" alt=""/>
+										</div>
+									</li>
+								</ul>
+							</div>
+							
+							<a href="javascript:void(0);" class="applyBtn">确认</a>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+			URL=$api.URL();
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+		var wrapper = document.getElementById("wrapperScroll");
+		var meunScroll = new BScroll(wrapper, {
+			click: true,
+			scrollX: false,
+			scrollY: true,   
+			pullUpLoad:false,
+			pullDownRefresh:false
+		});
+		
+		/*meunScroll.on("pullingDown",function(){     //下拉刷新
+			$("#wrapperScroll0 .refrenshLoad p").hide();
+			$("#wrapperScroll0 .refrenshLoad img").show();  
+		}); */
+
+		//上传身份证
+		var uploadState=false; //是否在上传中
+		var imgarr = [];
+		var picNum=0;
+		var upLoadIdCard=function(){
+			// api.getPicture({
+			//     sourceType: 'album',
+			//     encodingType: 'png',
+			//     mediaValue: 'pic',
+			//     destinationType: 'url',
+			//     allowEdit: true,
+			//     quality: 50,
+			//     targetWidth: 200,
+			//     targetHeight: 200,
+			//     saveToPhotoAlbum: false
+			// }, function(ret, err) {
+			//     if (ret) {
+			//         alert(JSON.stringify(ret));
+			//     } else {
+			//         alert(JSON.stringify(err));
+			//     }
+			// });
+			if(!uploadState){
+				var UIAlbumBrowser = api.require('UIAlbumBrowser');
+				UIAlbumBrowser.imagePicker({
+				    max: 1,
+				    styles: {
+					    bg: '#000000',                   
+					    cameraImg:'widget://res/cameraImg.jpg',
+					    mark: {                             
+					        icon: '',                       
+					        position: 'top_right',      
+					        size: 20                        
+					    },
+					    nav: {                              
+					        bg: '#000000',                     
+					        cancelColor: '#fff',            
+					        cancelSize: 16,  
+					        nextStepColor: '#7fff00',
+					        nextStepSize: 16                 
+					    },
+					 //    thumbnail:{      //（可选项）返回的缩略图配置，**建议本图片不要设置过大** 若已有缩略图，则使用已有的缩略图。若要重新生成缩略图，可先调用清除缓存接口api.clearCache()。  
+						//       w: 600,     //（可选项）数字类型；返回的缩略图的宽；默认：原图的宽度
+						//       h: 600      //（可选项）数字类型；返回的缩略图的宽；默认：原图的高度
+						// }  
+				    },
+				    animation:true,    
+				}, function(ret) { 
+				   	if (ret.eventType == 'nextStep') {
+				   		if (ret.list && ret.list.length > 0) {
+				   			MyToast('上传中请稍候');
+				   			uploadState=true;
+		                    imgarr = ret.list;
+		                    UIAlbumBrowser_transPath(0);
+		                }
+		                UIAlbumBrowser.closePicker();
+				    }else if(ret.eventType == "cancel"){ //取消选择图片
+				    	uploadState=false;
+				    	UIAlbumBrowser.closePicker();
+				    }else if(ret.originalPath!=""){ //拍照上传
+				    	MyToast('上传中请稍候');
+				    	uploadState=true;
+	                    var tempObj={"path":ret.originalPath};
+	                    imgarr[0]=tempObj;
+	                    UIAlbumBrowser_transPath(1);
+				    }
+				});
+			}else{
+				MyToast("上传中请稍候");
+			}
+		}
+
+		//图片转换
+		function UIAlbumBrowser_transPath(index) {
+			if(index==0){
+				var UIAlbumBrowser = api.require('UIAlbumBrowser');
+		        UIAlbumBrowser.transPath({
+		            path: imgarr[picNum].path
+		        }, function(ret, err) {
+		            if (ret) {
+		            	var imageFilter = api.require('imageFilter');
+						imageFilter.compress({
+						    img: ret.path,
+						    isClarityimg:false,
+						    quality: 0.5,
+						    save : {
+								album : false, //(可选项)布尔值，是否保存到系统相册，默认false
+								imgPath : 'fs://youqianhuan', //(可选项)保存的文件路径,字符串类型，无默认值,不传或传空则不保存，若路径不存在文件夹则创建此目录
+								imgName : 'youqianhuan_idcard'+picNum+'.jpg' //(可选项)保存的图片名字，支持png和jpg格式，若不指定格式，则默认png，字符串类型，无默认值,不传或传空则不保存
+							}
+						},function( ret, err ){        
+						    if( ret.status ){
+						        upload("fs://youqianhuan/youqianhuan_idcard"+picNum+".jpg","choose");
+						    }else{
+						        // alert( JSON.stringify( err ) );
+						    }
+						});
+		            } else {
+		                // console.log(JSON.stringify(err));
+		            }
+		        });
+			}else{
+				var imageFilter = api.require('imageFilter');
+				imageFilter.compress({
+				    img: imgarr[0].path,
+				    isClarityimg:false,
+				    quality: 0.5,
+				    save : {
+						album : false, //(可选项)布尔值，是否保存到系统相册，默认false
+						imgPath : 'fs://youqianhuan', //(可选项)保存的文件路径,字符串类型，无默认值,不传或传空则不保存，若路径不存在文件夹则创建此目录
+						imgName : 'youqianhuan_idcard.jpg' //(可选项)保存的图片名字，支持png和jpg格式，若不指定格式，则默认png，字符串类型，无默认值,不传或传空则不保存
+					}
+				},function( ret, err ){        
+				    if( ret.status ){
+				        upload("fs://youqianhuan/youqianhuan_idcard.jpg","camera");
+				    }else{
+				        // alert( JSON.stringify( err ) );
+				    }
+				});
+			}
+			
+	    }
+	</script>
+</body>
+</html>

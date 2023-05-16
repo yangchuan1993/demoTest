@@ -1,0 +1,24 @@
+/*注册*/
+.inputList li div.disBox .getCode{
+	color:#5EC4E3;
+	flex-shrink:0;
+	-webkit-flex-shrink:0;
+	font-size:14px;
+	width:72px;
+	height:45px;
+	text-align:center;
+}
+.registerAgree{
+	text-align:left;
+	padding:10px 6px 20px;
+	color:#545363;
+}
+.loginInput{margin-bottom:40px;}
+
+/*忘记密码*/
+.forgetList{
+	margin-bottom:20px;
+}
+.forgetInput{
+	margin-bottom:68px;
+}

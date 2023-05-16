@@ -1,0 +1,47 @@
+.myWalletPage{
+	padding:16px;
+}
+.myWalletPage ul li{
+	padding:18px 14px;
+	background-color:#3D4375;
+	margin-bottom:16px;
+	border-radius:4px;
+}
+.myWalletPage ul li div.disBox p{
+	color:#6875A1;
+	font-size:14px;
+}
+.myWalletPage ul li div.disBox span{
+	color:#49A2D6;
+	font-size:14px;
+}
+.accountNum{
+	color:#E0E3EB;
+	font-size:14px;
+	font-weight:normal;
+}
+.accountNum i{
+	font-size:35px;
+}
+.accountRow{
+	color:#747FAD;
+	font-size:13px;
+	font-weight:normal;
+	padding:4px 0;
+}
+.accountRow span{
+	color:#5292C8;
+}
+.detailList{
+	display:inline-block;
+	color:#fff;
+	font-size:12px;
+	width:58px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	border-radius:4px;
+	background-color:#34C0FD;
+	float:right;
+	margin-top:-30px;
+}

@@ -1,0 +1,40 @@
+.firendtList ul li:after{
+	content:"";
+	display:block;
+	height:1px;
+	background-color:#252B5B;
+	margin-left:16px;
+}
+.firendtList ul li div.disBox{
+	padding:18px 12px;
+}
+.firendtList ul li img{
+	width:35px;
+	height:35px;
+}
+.firendtList ul li a.firendMsg{
+	margin-left:25px;
+	
+}
+.firendMsg span{
+	color:#fff;
+	font-size:12px;
+}
+.firendMsg h3{
+	color:#fff;
+	font-size:12px;
+	font-weight:normal;
+}
+.firendtList ul li p{
+	color:#8E97BE;
+	font-size:14px;
+	text-align:center;
+}
+.firendtList ul li i{
+	color:#7B81B1;
+	font-size:12px;
+}
+.flexShrink{
+	flex-shrink:0;
+	-webkit-flex-shrink:0;
+}

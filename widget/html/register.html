@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/register.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<!-- <script type="text/javascript" src="../script/lib/flexible.js"></script> -->
+</head>
+<body style="background-color:#2E3466;">
+	<header id="header"></header>
+	<div class="loginMain">
+		<div class="logo_tit">
+			<img src="../image/logo.png" alt=""/>
+			<p class="title">有钱花</p>
+		</div>
+		<div class="loginForm">
+			<div class="loginInput">
+				<p class="formTitle">注册</p>
+				<form method="post" action="">
+					<ul class="inputList">
+						<li>
+							<input type="text" name="tel" id="tel" value="" placeholder="请输入您的手机号"/>
+						</li>
+						<li>
+							<div class="disBox">
+								<input type="password" class="boxFlex" id="code" name="code" value="" placeholder="请输入验证码"/>
+								<input type="button" class="getCode" value="获取验证码"/>
+							</div>
+						</li>
+						<li>
+							<input type="password" name="pwd" id="pwd" value="" placeholder="密码"/>
+						</li>
+						<li>
+							<input type="text" name="invite_code" id="invite_code" value="" placeholder="邀请码(必填)"/>
+						</li>
+					</ul>
+					<div class="forgetPwd registerAgree">
+						注册并同意<a href="javascript:void(0);">《注册协议》</a>
+					</div>
+					<div class="loginIn">
+						<input type="button" value="注册" onclick="registerFun();" tapmode />
+					</div>
+				</form>
+			</div>
+			<div class="bottomInput">
+				<a href="javascript:void(0);" class="loginQuick" onclick="goLogin()" tapmode >快速登录</a>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+	        exit_app();  //双击退出APP
+			URL=$api.URL();
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+	    //双击退出APP
+        function exit_app() {
+            api.addEventListener({
+                name : 'keyback'
+            }, function(ret, err) {
+                api.toast({
+                   msg: '再按一次返回键退出'+api.appName,
+                   duration: 2000,
+                   location: 'bottom'
+                });
+                api.addEventListener({
+                    name : 'keyback'
+                }, function(ret, err) {
+                    api.closeWidget({
+                        animation : {
+                            type : 'flip',
+                            subType : 'from_bottom',
+                            duration : 500
+                        },
+                        silent : true
+                    });
+                });
+              setTimeout(function() {
+                 exit_app();
+              }, 3000);
+            });
+        }
+
+        //登录
+		var goLogin=function(){
+			api.openWin({
+				name: 'login',
+				url: './login.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//获取验证码
+		$(".getCode").click(function(){
+			var _that=$(this);
+			var tel=$("#tel").val();
+			if(tel=="" || tel==undefined ||tel==null){
+				MyToast("请输入手机号码");
+			}else if(!(/^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|16[6]|17[0-9]|18[0-9]|19[8|9])\d{8}$/.test(tel))){
+				MyToast("手机号码错误");
+			}else{
+				 _that.prop("disabled",true);
+				// $.ajax({
+				// 	url:"index.php?app=sms&act=crsms",
+				// 	data :{
+				// 		telphone:tel,
+				// 	},
+				// 	async : true, //异步请求 
+				// 	dataType : 'JSON',
+				// 	type : 'POST',
+				// 	success : function(data) {
+				// 		if(data==1){
+							MyToast('发送成功');
+							countDown(_that);//倒计时
+						// }else{
+						// 	MyToast("验证码获取失败");
+						// 	_that.removeAttr("disabled");
+						// }
+				// 	},
+				// 	error : function() { 
+				// 		console.log("请求失败")
+				// 	},
+				// }); 
+			}
+		})
+			
+		/**倒计时**/
+		var countDown=function(_that){
+			var _second=60;
+			_that.val(_second+"s");
+			_that.prop("disabled",true);
+			_that.addClass("active");
+			var _time=setInterval(function(){
+				_second--;
+				if(_second<=0){
+					clearInterval(_time);
+					_that.val("重新获取");
+					_that.prop("disabled",false);
+					_that.removeClass("active");
+				}else{
+					_that.val(_second+"s");
+				}	
+			},1000)
+		}
+
+		//注册
+		var registerFun=function(){
+			var tel=$("#tel").val();
+			var code=$("#code").val();
+			var pwd=$("#pwd").val();
+			var invite_code=$("#invite_code").val();
+			if(tel=="" || tel==undefined ||tel==null){
+				MyToast("请输入手机号码");
+			}else if(!(/^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|16[6]|17[0-9]|18[0-9]|19[8|9])\d{8}$/.test(tel))){
+				MyToast("手机号码错误");
+			}else if(code=="" ||code==null||code==undefined){
+				MyToast("请输入验证码");
+			}else if(pwd=="" ||pwd==null ||pwd==undefined){
+				MyToast("请输入密码");
+			}else if(pwd.length<6 || pwd.length>20){
+				MyToast("密码为6-20位");
+			}else if(invite_code=="" ||invite_code==null ||invite_code==undefined){
+				MyToast("请输入邀请码");
+			}else{
+				MyToast("注册成功");
+				setTimeout(function(){
+					api.openWin({
+						name: 'login',
+						url: './login.html',
+						bounces: false,
+						allowEdit:false,
+						animation:{
+							type:"fade",                //动画类型（详见动画类型常量）
+							subType:"from_right",       //动画子类型（详见动画子类型常量）
+							duration:300                //动画过渡时间，默认300毫秒
+						}
+					});
+				},300)
+			}
+		}
+	</script>
+</body>
+</html>

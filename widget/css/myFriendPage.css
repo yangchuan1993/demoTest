@@ -1,0 +1,51 @@
+.myFriendMain{
+	padding:16px;
+}
+.myShare{
+	padding:60px 2px 22px;
+	text-align:center;
+	border-radius:4px;
+	background-color:#3D4375;
+	box-shadow:0 0 10px rgba(0,0,0,0.2);
+	-webkit-box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+.myShare img{
+	width:142px;
+	height:142px;
+}
+.inviteCode{
+	color:#686EA0;
+	font-size:14px;
+	padding:10px 0 30px;
+}
+.inviteCode span{
+	color:#4BB6E5;
+	font-size:18px;
+}
+.inviteCopy li{
+	float:left;
+	width:50%;
+	padding:0 12px;
+}
+.inviteCopy li a{
+	display:block;
+	width:100%;
+	height:45px;
+	line-height:45px;
+	text-align:center;
+	border-radius:4px;
+	background-color:#7789AD;
+	color:#E5F0F0;
+	font-size:15px;
+}
+.inviteCopy li:first-child a{
+	background-color:#4FDEFF;
+}
+.tips{
+	color:#707BAC;
+	font-size:14px;
+	padding-top:12px;
+}
+.tips p{
+	padding:2px 0;
+}

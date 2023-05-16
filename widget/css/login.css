@@ -1,0 +1,96 @@
+html{
+	background-color:#2E3466;
+}
+header{
+	background-color:#353B6D;
+}
+.logo_tit{
+	padding:20px 0 10px;
+	text-align:center;
+}
+.logo_tit img{
+	width:95px;
+	height:95px;
+}
+.logo_tit .title{
+	color:#21B8D3;
+	font-size:26px;
+	font-weight:600;
+}
+.loginForm{
+	padding:0 22px;
+}
+.loginInput{
+	background-color:#FDFFFE;
+	border-radius:5px;
+}
+.loginInput{
+	padding:22px 16px 12px;
+	margin-bottom:128px;
+}
+.formTitle{
+	color:#43435C;
+	font-size:22px;
+	padding:0 0 12px 6px;
+}
+.inputList{
+	padding:0 6px;
+}
+.inputList li{
+	border-bottom:1px solid #E9EBEA;
+}
+.inputList li input[type="text"],.inputList li input[type="password"]{
+	display:block;
+	height:45px;
+	width:100%;
+	font-size:14px;
+	padding:0 15px;
+}
+.inputList li input::-webkit-input-placeholder{
+	color:#B7BFC5;
+}
+.inputList li input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:#B7BFC5;
+}
+.inputList li input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:#B7BFC5;
+}
+.inputList li input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+	color:#B7BFC5;
+}
+.forgetPwd{
+	text-align:right;
+	font-size:12px;
+	padding:10px 0 20px;
+}
+.forgetPwd a{
+	color:#66BCCF;
+}
+.loginIn input[type="button"]{
+	display:block;
+	width:100%;
+	height:52px;
+	text-align:center;
+	color:#D2F2FA;
+	font-size:16px;
+	border-radius:4px;
+	background:linear-gradient(to bottom,#4EDDFE,#35BCFC);
+	background:-moz-linear-gradient( top,#4EDDFE,#35BCFC);
+	background:-webkit-linear-gradient( top,#4EDDFE,#35BCFC);
+	background:-webkit-gradient(linear,center top,center bottom,from(#4EDDFE),to(#35BCFC));
+	background:-o-linear-gradient( top,#4EDDFE,#35BCFC);
+}
+.bottomInput{
+	padding:0 20px;
+}
+.loginQuick{
+	display:block;
+	width:100%;
+	height:46px;
+	line-height:46px;
+	border:1px solid #696F9F;
+	color:#696F9F;
+	font-size:14px;
+	text-align:center;
+	border-radius:4px;
+}

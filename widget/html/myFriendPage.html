@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的好友</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/myFriendPage.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<!-- <script type="text/javascript" src="../script/lib/flexible.js"></script> -->
+</head>
+<body style="background-color:#2E3466;height:100%;">
+	<div id="wrap" class="columnDisBox">
+		<header class="header" id="header">
+			<a href="javascript:void(0);" class="btn_lf btn_back" onclick="goBack()" tapmode >
+				<i class="iconfont icon-fanhui"></i>
+			</a>
+			<a href="javascript:void(0);" class="btn_rg btn_back" onclick="myFirendList()" tapmode >
+				好友列表
+			</a>
+			<h3>我的好友</h3>
+		</header>
+		
+		<div id="main" class="main columnBoxFlex" style="overflow:hidden;position:relative;">
+			<div class="wrapperScroll wrapperNoRefrensh" id="wrapperScroll" style="height:100%;position:absolute;width:100%;">
+				<div class="scrollSlide">
+					
+					<div class="myFriendMain">
+						<div class="myShare">
+							<img src="../image/code.png" alt=""/>
+							<p class="inviteCode">邀请码：<span>IOS3H9</span></p>
+							<ul class="inviteCopy clearfix">
+								<li>
+									<a href="javascript:void(0);" data-val="http://youqianhuan.sjxinfo.com.cn/" onclick="copyHref(this)" tapmode >复制邀请链接</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" onclick="savePic()" tapmode >保存为图片</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tips">
+							<p>1、每推荐一个用户注册可得50元保证金，可提现</p>
+							<p>2、好友每次还款可获得5%-10%手续费提成</p>
+							<p>3、好友每次众筹可获得3%-8%收益分成</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+			URL=$api.URL();
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+		var wrapper = document.getElementById("wrapperScroll");
+		var meunScroll = new BScroll(wrapper, {
+			click: true,
+			scrollX: false,
+			scrollY: true,   
+			pullUpLoad:false,
+			pullDownRefresh:false
+		});
+		
+		/*meunScroll.on("pullingDown",function(){     //下拉刷新
+			$("#wrapperScroll0 .refrenshLoad p").hide();
+			$("#wrapperScroll0 .refrenshLoad img").show();  
+		}); */
+
+		//好友列表
+		var myFirendList=function(){
+			api.openWin({
+				name: 'friendListPage',
+				url: './friendListPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//复制邀请码
+		var copyHref=function(objThis){
+			var _href=$(objThis).attr("data-val");
+			var clipBoard = api.require('clipBoard');
+			clipBoard.set({
+			    value: '_href'
+			}, function(ret, err) {
+			    if (ret) {
+			        MyToast("复制成功");
+			    } else {
+			        alert("复制失败");
+			    }
+			});
+		}
+
+		//保存图片
+		var savePic=function(){
+			// api.download({
+			//     url: url,
+			//     savePath: 'fs://youqianhuan.png',
+			//     report: true,
+			//     cache: true,
+			//     allowResume: true
+			// }, function(ret, err) {
+			//     if (ret.state == 1) {
+			//         //下载成功
+			//     } else {
+
+			//     }
+			// });
+			var trans = api.require('trans');
+			trans.decodeImgToBase64({
+			    imgPath: '../image/code.png'
+			}, function(ret, err) {
+			    if (ret.status) {
+			        // alert(JSON.stringify(ret));
+			        trans.saveImage({
+					    base64Str: ret.base64Str,
+					    imgPath:"fs://youqianhuan/",
+					    imgName:"youqianhuan.png"
+					}, function(ret, err) {
+					    if (ret.status) {
+					       // alert(JSON.stringify(ret));
+					        MyToast("保存成功");
+					    } else {
+					    	MyToast("保存失败");
+					        //alert(JSON.stringify(err));
+					    }
+					});
+			    } else {
+			        //alert(JSON.stringify(err));
+			    }
+			});
+		}
+	</script>
+</body>
+</html>

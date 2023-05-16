@@ -1,0 +1,26 @@
+.myTeamMain{
+	padding-top:6px;
+}
+.myTeamMain table{
+	border-collapse:collapse;
+	width:100%;
+}
+.myTeamMain table th,.myTeamMain table td{
+	border:0;
+	color:#CFD9F0;
+	font-weight:normal;
+	padding:0 10px;
+	text-align:left;
+}
+.myTeamMain table th{
+	background-color:#3B4077;
+	height:42px;
+}
+.myTeamMain table td{
+	height:42px;
+	border-bottom:1px solid #31366D;
+	background-color:#353A71;
+}
+.myTeamMain table tr td:last-child,.myTeamMain table tr th:last-child{
+	text-align:right;
+}

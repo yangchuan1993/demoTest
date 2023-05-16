@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/firstPage.css"/>
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
+	<!-- <script type="text/javascript" src="../script/lib/flexible.js"></script> -->
+</head>
+<body style="background-color:#2E3563;height:100%;">
+	<div id="wrap" class="columnDisBox">
+		<header class="header" id="header">
+			<a href="javascript:void(0);" class="btn_lf" onclick="goMessage()" tapmode >
+				<i class="iconfont icon-xiaoxi"></i>
+			</a>
+			<a href="javascript:void(0);" class="btn_rg" onclick="goArticleView()" tapmode >
+				<i class="iconfont icon-kefu"></i>
+			</a>
+			<h3>有钱还</h3>
+		</header>
+				
+		<div id="main" class="main columnBoxFlex" style="overflow:hidden;position:relative;">
+			<div class="wrapperScroll wrapperNoRefrensh" id="wrapperScroll" style="height:100%;position:absolute;width:100%;">
+				<div class="scrollSlide">
+					
+					<div class="banner">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="../image/banner.png" alt="" alt="" width="100%"/>
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+					<div class="needRepay">
+						<div class="needRepayMain">
+							<img src="../image/replayTitle.png" class="repayTitle" alt=""/>
+							<div class="disBox">
+								<p class="boxFlex"></p>
+								<a href="javascript:void(0);" class="more">查看更多</a>
+							</div>
+						</div>
+					</div>
+					<div class="onlyItem">
+						<p>特色服务</p>
+						<ul class="onlyList">
+							<li>
+								<a href="javascript:void(0);" class="clearfix">
+									<div class="onlyMain">
+										<div class="onlyLf onlyLf0">
+										智能还贷
+										</div>
+										<div class="onlyRg">
+											<h3>还房贷 还车贷</h3>
+											<p>3-5个月还清百万债务</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="clearfix">
+									<div class="onlyMain">
+										<div class="onlyLf onlyLf1">
+										0费率还卡
+										</div>
+										<div class="onlyRg">
+											<h3>随借随还 低门槛</h3>
+											<p>低保金抵扣利息</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="clearfix">
+									<div class="onlyMain">
+										<div class="onlyLf onlyLf2">
+										帮还利息
+										</div>
+										<div class="onlyRg">
+											<h3>担保抵押 平台担保</h3>
+											<p class="twoLine">帮助他人还卡利息 轻松摆脱债务</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="clearfix">
+									<div class="onlyMain">
+										<div class="onlyLf onlyLf3">
+										申请代理
+										</div>
+										<div class="onlyRg">
+											<h3>无忧裂变计划 长期稳定高收入</h3>
+											<p class="twoLine">长期稳定高收入</p>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="college"> 
+						<p>有钱还学院 <span>学习更多还卡知识 摆脱卡奴</span></p>
+						<div class="collegeMain">
+							<ul class="clearfix">
+								<li>
+									<a href="javascript:void(0);">
+										<div class="collegeDetail">
+											<img src="../image/college0.png" width="100%" alt=""/>
+										</div>
+										<p>0费率还款技巧</p>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);">
+										<div class="collegeDetail">
+											<img src="../image/college1.png" width="100%" alt=""/>
+										</div>
+										<p>担保金如何获取?</p>
+									</a>
+								</li>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer">
+			<ul>
+				<li class="active">
+					<i class="iconfont icon-1"></i>
+					<p>首页</p>
+				</li>
+				<li onclick="switchTab1()" tapmode>
+					<i class="iconfont icon-wodejihua"></i>
+					<p>计划</p>
+				</li>
+				<li onclick="switchTab2()" tapmode>
+					<i class="iconfont icon-tianchongxing-"></i>
+					<p>钱包</p>
+				</li>
+				<li onclick="switchTab3()" tapmode>
+					<i class="iconfont icon-wode"></i>
+					<p>我的</p>
+				</li>
+			</ul>
+		</footer>
+	</div>
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../script/lib/swiper.min.js"></script>
+	<script type="text/javascript" src="../script/lib/bscroll.min.js"></script>
+	<script type="text/javascript" src="../script/lib/layer.js"></script>
+	<script type="text/javascript" src="../script/lib/layer_style.js"></script>
+	<script type="text/javascript" src="../script/lib/fastclick.js"></script>
+	<script type="text/javascript">
+		var URL="";
+		$(function() {  //消除300ms点击延迟
+			FastClick.attach(document.body);
+		});
+
+		apiready = function(){
+			var header = $api.byId('header');
+	        //适配iOS 7+，Android 4.4+状态栏
+	        $api.fixStatusBar(header);
+
+	        exit_app();  //双击退出APP
+			URL=$api.URL();
+
+	    }
+	     //返回上一页
+	    var goBack=function(){
+	        api.closeWin();
+	    }
+
+	    //双击退出APP
+        function exit_app() {
+            api.addEventListener({
+                name : 'keyback'
+            }, function(ret, err) {
+                api.toast({
+                   msg: '再按一次返回键退出'+api.appName,
+                   duration: 2000,
+                   location: 'bottom'
+                });
+                api.addEventListener({
+                    name : 'keyback'
+                }, function(ret, err) {
+                    api.closeWidget({
+                        animation : {
+                            type : 'flip',
+                            subType : 'from_bottom',
+                            duration : 500
+                        },
+                        silent : true
+                    });
+                });
+              setTimeout(function() {
+                 exit_app();
+              }, 3000);
+            });
+        }
+		
+		
+		var wrapper = document.getElementById("wrapperScroll");
+		var meunScroll = new BScroll(wrapper, {
+			click: true,
+			scrollX: false,
+			scrollY: true,   
+			pullUpLoad:false,
+			pullDownRefresh:false
+		});
+		
+		/*meunScroll.on("pullingDown",function(){     //下拉刷新
+			$("#wrapperScroll0 .refrenshLoad p").hide();
+			$("#wrapperScroll0 .refrenshLoad img").show();  
+		}); */
+		
+		var mySwiper = new Swiper('.swiper-container', {
+			autoplay: {
+				delay: 5000,//5秒切换一次
+				disableOnInteraction: false
+			},//可选选项，自动滑动
+			loop : true,
+			observer:true,//修改swiper自己或子元素时，自动初始化swiper
+			observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			lazy: {
+				loadOnTransitionStart: true,  //懒加载
+			},
+			pagination: {
+				el: '.swiper-pagination',
+			},
+		})
+
+		//计划
+		var switchTab1=function(){
+			api.openWin({
+				name: 'planPage',
+				url: './planPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+		//钱包
+		var switchTab2=function(){
+			api.openWin({
+				name: 'myWalletPage',
+				url: './myWalletPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+		//我的
+		var switchTab3=function(){
+			api.openWin({
+				name: 'myPage',
+				url: './myPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"fade",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//消息
+		var goMessage=function(){
+			api.openWin({
+				name: 'myMessagePage',
+				url: './myMessagePage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+		//客服
+		var goArticleView=function(){
+			api.openWin({
+				name: 'articleViewPage',
+				url: './articleViewPage.html',
+				bounces: false,
+				allowEdit:false,
+				animation:{
+					type:"push",                //动画类型（详见动画类型常量）
+					subType:"from_right",       //动画子类型（详见动画子类型常量）
+					duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+		}
+
+
+	</script>
+</body>
+</html>
